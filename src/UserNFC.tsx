@@ -142,12 +142,6 @@ export default function UserNFC() {
               {profile.display_name || 'No name'}
             </h1>
 
-            {/* Card ID */}
-            <div className="flex items-center justify-center gap-1.5 text-gray-500 text-sm mb-2">
-              <CreditCard className="w-4 h-4" />
-              <span>{profile.card_id}</span>
-            </div>
-
             {/* Headline */}
             <div className="flex items-center justify-center gap-1.5 text-blue-600 mb-2">
               <Briefcase className="w-4 h-4" />
