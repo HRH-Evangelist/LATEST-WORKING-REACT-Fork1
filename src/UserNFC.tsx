@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, ChevronRight, CreditCard } from 'lucide-react';
+import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, ChevronRight, CreditCard, Edit3 } from 'lucide-react';
 
 interface UserProfile {
   card_id: string;
@@ -185,154 +185,195 @@ export default function UserNFC() {
           <div className="px-6 pb-6">
             <h3 className="text-sm font-semibold text-gray-900 mb-3">Contact Information</h3>
             <div className="space-y-2">
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-green-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">WhatsApp</div>
-                  <div className="text-sm font-medium text-gray-900">
-                    {profile.whatsapp && profile.whatsapp !== 'None' ? (
-                      <a
-                        href={`https://wa.me/${profile.whatsapp.replace(/\D/g, '')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-green-600"
-                      >
-                        {profile.whatsapp}
-                      </a>
-                    ) : (
+              {profile.whatsapp && profile.whatsapp !== 'None' ? (
+                <a
+                  href={`https://wa.me/${profile.whatsapp.replace(/\D/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">WhatsApp</div>
+                    <div className="text-sm font-medium text-gray-900">{profile.whatsapp}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">WhatsApp</div>
+                    <div className="text-sm font-medium text-gray-900">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.whatsapp && profile.whatsapp !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-blue-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">Phone</div>
-                  <div className="text-sm font-medium text-gray-900">
-                    {profile.phone && profile.phone !== 'None' ? (
-                      <a href={`tel:${profile.phone}`} className="hover:text-blue-600">
-                        {profile.phone}
-                      </a>
-                    ) : (
+              {profile.phone && profile.phone !== 'None' ? (
+                <a
+                  href={`tel:${profile.phone}`}
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Phone</div>
+                    <div className="text-sm font-medium text-gray-900">{profile.phone}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Phone</div>
+                    <div className="text-sm font-medium text-gray-900">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.phone && profile.phone !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-red-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">Email</div>
-                  <div className="text-sm font-medium text-gray-900 truncate">
-                    {profile.email_public && profile.email_public !== 'None' ? (
-                      <a href={`mailto:${profile.email_public}`} className="hover:text-red-600">
-                        {profile.email_public}
-                      </a>
-                    ) : (
+              {profile.email_public && profile.email_public !== 'None' ? (
+                <a
+                  href={`mailto:${profile.email_public}`}
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Email</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">{profile.email_public}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Email</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.email_public && profile.email_public !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Linkedin className="w-5 h-5 text-blue-700" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">LinkedIn</div>
-                  <div className="text-sm font-medium text-gray-900 truncate">
-                    {profile.linkedin && profile.linkedin !== 'None' ? (
-                      <a
-                        href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-blue-700"
-                      >
-                        {profile.linkedin}
-                      </a>
-                    ) : (
+              {profile.linkedin && profile.linkedin !== 'None' ? (
+                <a
+                  href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Linkedin className="w-5 h-5 text-blue-700" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">LinkedIn</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">{profile.linkedin}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Linkedin className="w-5 h-5 text-blue-700" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">LinkedIn</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.linkedin && profile.linkedin !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-purple-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">Website</div>
-                  <div className="text-sm font-medium text-gray-900 truncate">
-                    {profile.website && profile.website !== 'None' ? (
-                      <a
-                        href={profile.website.startsWith('http') ? profile.website : `https://${profile.website}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-purple-600"
-                      >
-                        {profile.website}
-                      </a>
-                    ) : (
+              {profile.website && profile.website !== 'None' ? (
+                <a
+                  href={profile.website.startsWith('http') ? profile.website : `https://${profile.website}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Website</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">{profile.website}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Website</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.website && profile.website !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-green-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-xs text-gray-500">Payment Link</div>
-                  <div className="text-sm font-medium text-gray-900 truncate">
-                    {profile.payment_link && profile.payment_link !== 'None' ? (
-                      <a
-                        href={profile.payment_link.startsWith('http') ? profile.payment_link : `https://${profile.payment_link}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-green-600"
-                      >
-                        {profile.payment_link}
-                      </a>
-                    ) : (
+              {profile.payment_link && profile.payment_link !== 'None' ? (
+                <a
+                  href={profile.payment_link.startsWith('http') ? profile.payment_link : `https://${profile.payment_link}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
+                >
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Payment Link</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">{profile.payment_link}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gray-500">Payment Link</div>
+                    <div className="text-sm font-medium text-gray-900 truncate">
                       <span className="text-gray-400">-</span>
-                    )}
+                    </div>
                   </div>
                 </div>
-                {profile.payment_link && profile.payment_link !== 'None' && (
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                )}
-              </div>
+              )}
             </div>
           </div>
 
+        </div>
+
+        {/* Edit Details Button */}
+        <div className="fixed bottom-6 right-6">
+          <a
+            href="https://1secstory.com/edit_profile"
+            className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
+          >
+            <Edit3 className="w-5 h-5" />
+            Edit Details
+          </a>
         </div>
       </div>
     </div>

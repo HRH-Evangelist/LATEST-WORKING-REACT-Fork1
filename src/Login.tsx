@@ -56,7 +56,15 @@ function Login() {
       });
 
       const data = await response.json();
-      setMessage(data.message || 'Done');
+
+      if (data.success) {
+        setMessage('Login successful! Redirecting...');
+        setTimeout(() => {
+          window.location.href = 'https://1secstory.com/edit_profile';
+        }, 1000);
+      } else {
+        setMessage(data.message || 'Login failed');
+      }
     } catch {
       setMessage('❌ Server error');
     } finally {
