@@ -76,7 +76,7 @@ function App() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://1secstory.com/verify', {
+      const response = await fetch('https://api.1secstory.com/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
