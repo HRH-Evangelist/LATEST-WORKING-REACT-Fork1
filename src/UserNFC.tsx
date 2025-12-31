@@ -36,7 +36,7 @@ export default function UserNFC() {
         return;
       }
 
-      const response = await fetch('https://1secstory.com/get_public_info', {
+      const response = await fetch('https://api.1secstory.com/get_public_info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
