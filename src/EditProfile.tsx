@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, MessageSquare, Phone, Mail, Linkedin, Globe, CreditCard, Link2, Bookmark } from 'lucide-react';
+import { User, Briefcase, MessageSquare, Phone, Mail, Linkedin, Globe, CreditCard, Link2 } from 'lucide-react';
 
 interface ProfileData {
   display_name: string | null;
@@ -335,26 +335,13 @@ function EditProfile() {
             </div>
           </div>
 
-          <div className="flex gap-3">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="flex-1 py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
-            >
-              {isLoading ? 'Saving Changes...' : 'Save Changes'}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                const url = window.location.href;
-                navigator.clipboard.writeText(url);
-                setMessage('URL bookmarked to clipboard!');
-              }}
-              className="px-5 py-3.5 md:py-4 bg-gray-500 hover:bg-gray-600 active:bg-gray-700 text-white font-medium rounded-lg transition-colors shadow-sm flex items-center gap-2"
-            >
-              <Bookmark className="w-5 h-5" />
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+          >
+            {isLoading ? 'Saving Changes...' : 'Save Changes'}
+          </button>
 
           {message && (
             <div className={`text-center text-sm font-medium ${
