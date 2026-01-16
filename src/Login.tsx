@@ -40,7 +40,7 @@ function Login() {
       const data = await response.json();
 
       if (data.is_login_success) {
-        setMessage('Login successful! Redirecting...');
+        setMessage('Login successful!');
         setTimeout(() => {
           window.location.href = '/edit_profile';
         }, 1000);
