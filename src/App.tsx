@@ -94,7 +94,7 @@ function App() {
       if (data.is_reg_complete === true) {
         let seconds = 5;
         const timer = setInterval(() => {
-          setMessage(`✅ Registration Successful. Redirecting to login in ${seconds}...`);
+          setMessage(`Processing...`);
           seconds--;
 
           if (seconds < 0) {
