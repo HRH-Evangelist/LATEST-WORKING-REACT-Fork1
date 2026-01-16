@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/user" element={<UserRedirect />} />
         <Route path="/edit_profile" element={<EditProfile />} />
         <Route path="/hhl" element={<HHL />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Navigate to="/hhl" replace />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
