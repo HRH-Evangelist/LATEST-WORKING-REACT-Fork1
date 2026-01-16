@@ -152,7 +152,7 @@ function EditProfile() {
 
         setMessage('Profile updated successfully! Redirecting [NFC Method]...');
         setTimeout(() => {
-          window.location.href = `https://1secstory.com/user-nfc?id=${sessionCardId}`;
+          window.location.href = `/user-nfc?id=${sessionCardId}`;
         }, 1000);
       } else {
         setMessage(data.message || 'Failed to update profile');

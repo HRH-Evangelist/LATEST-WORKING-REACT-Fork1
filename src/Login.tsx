@@ -1,47 +1,28 @@
 import { useState } from 'react';
-import { Mail, Lock, Key, CreditCard } from 'lucide-react';
+import { Mail, Lock, CreditCard } from 'lucide-react';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState('');
   const [cardId, setCardId] = useState('');
   const [message, setMessage] = useState('');
-  const [showOtpFields, setShowOtpFields] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
 
   const validateEmail = (email: string) => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
   };
 
-  const handleSendOtp = async () => {
+  const handleLogin = async () => {
     if (!validateEmail(email)) {
       setMessage('Enter a valid email address');
       return;
     }
 
-    setIsLoading(true);
-    try {
-      const response = await fetch('https://api.1secstory.com/otp', {
-  method: 'POST',
-  credentials: 'include', // 🔥 REQUIRED
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ email, password })
-});
-
-
-      const data = await response.json();
-      setMessage(data.message || 'OTP Sent');
-      setShowOtpFields(true);
-    } catch {
-      setMessage('❌ Server error');
-    } finally {
-      setIsLoading(false);
+    if (!password) {
+      setMessage('Enter your password');
+      return;
     }
-  };
 
-  const handleVerifyLogin = async () => {
     if (!cardId.startsWith('TS')) {
       setMessage('Invalid card ID format');
       return;
@@ -51,9 +32,9 @@ function Login() {
     try {
       const response = await fetch('https://api.1secstory.com/verify_login', {
         method: 'POST',
-  credentials: 'include', // 🔥 REQUIRED
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, otp, card_id: cardId })
+        body: JSON.stringify({ email, password, card_id: cardId })
       });
 
       const data = await response.json();
@@ -124,61 +105,32 @@ function Login() {
             </div>
           </div>
 
-          {/* OTP Field - Shown after sending OTP */}
-          {showOtpFields && (
-            <>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Enter OTP</label>
-                <div className="relative">
-                  <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    placeholder="Enter OTP"
-                    className="w-full pl-11 pr-4 py-3 md:py-3.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-base"
-                  />
-                </div>
-              </div>
-
-              {/* Card ID Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Card ID</label>
-                <div className="relative">
-                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    value={cardId}
-                    onChange={(e) => setCardId(e.target.value)}
-                    placeholder="Enter Card ID (ex: TS1234)"
-                    className="w-full pl-11 pr-4 py-3 md:py-3.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-base"
-                  />
-                </div>
-                <p className="mt-2 text-xs text-gray-500">
-                  Card ID must start with "TS"
-                </p>
-              </div>
-            </>
-          )}
+          {/* Card ID Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Card ID</label>
+            <div className="relative">
+              <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={cardId}
+                onChange={(e) => setCardId(e.target.value)}
+                placeholder="Enter Card ID (ex: TS1234)"
+                className="w-full pl-11 pr-4 py-3 md:py-3.5 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-base"
+              />
+            </div>
+            <p className="mt-2 text-xs text-gray-500">
+              Card ID must start with "TS"
+            </p>
+          </div>
 
           {/* Button */}
-          {!showOtpFields ? (
-            <button
-              onClick={handleSendOtp}
-              disabled={isLoading}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
-            >
-              {isLoading ? 'Sending...' : 'Send OTP'}
-            </button>
-          ) : (
-            <button
-              onClick={handleVerifyLogin}
-              disabled={isLoading}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
-            >
-              {isLoading ? 'Verifying...' : 'Verify & Login'}
-            </button>
-          )}
+          <button
+            onClick={handleLogin}
+            disabled={isLoading}
+            className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
 
           {/* Message */}
           {message && (
