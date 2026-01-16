@@ -184,8 +184,8 @@ function EditProfile() {
             <img src="/artboard_2_1.png" alt="1SecStory" className="w-20 h-20 md:w-24 md:h-24 object-contain" />
           </div>
 
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1 md:mb-2">Edit Profile</h1>
-          <p className="text-gray-500 text-sm">Update your public card information</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1 md:mb-2">Edit Story</h1>
+          <p className="text-gray-500 text-sm">your identity in 1 sec</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
