@@ -180,7 +180,7 @@ export default function UserNFC() {
           {/* Micro Facts Section */}
           <div className="px-6 pb-6">
             <div className="bg-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Micro Facts</h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">My Story</h3>
               <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
                 {profile.micro_facts && profile.micro_facts !== 'None' ? (
                   profile.micro_facts
