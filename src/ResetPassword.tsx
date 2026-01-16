@@ -33,7 +33,7 @@ function ResetPassword() {
       const response = await fetch('https://api.1secstory.com/otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, password })
       });
 
       const data = await response.json();
