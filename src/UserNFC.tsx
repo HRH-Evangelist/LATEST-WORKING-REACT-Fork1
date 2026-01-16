@@ -67,8 +67,33 @@ export default function UserNFC() {
 
   const handleShare = async () => {
     const url = window.location.href;
-    await navigator.clipboard.writeText(url);
-    alert('Link copied to clipboard!');
+    const shareData = {
+      title: `${profile?.display_name || 'Profile'} - 1SecStory`,
+      text: `Check out ${profile?.display_name || 'this profile'} on 1SecStory`,
+      url: url
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback for devices that don't support Web Share API
+        await navigator.clipboard.writeText(url);
+        alert('Link copied to clipboard!');
+      }
+    } catch (err) {
+      // User cancelled share or error occurred
+      if (err instanceof Error && err.name !== 'AbortError') {
+        console.error('Error sharing:', err);
+        // Fallback to clipboard
+        try {
+          await navigator.clipboard.writeText(url);
+          alert('Link copied to clipboard!');
+        } catch (clipboardErr) {
+          alert('Unable to share. Please copy the URL manually.');
+        }
+      }
+    }
   };
 
   const handleSave = async () => {
