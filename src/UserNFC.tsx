@@ -19,6 +19,7 @@ export default function UserNFC() {
   const [searchParams] = useSearchParams();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [showFullBio, setShowFullBio] = useState(false);
   const cardId = searchParams.get('id');
 
@@ -29,6 +30,7 @@ export default function UserNFC() {
   const fetchProfile = async () => {
     try {
       setLoading(true);
+      setError(false);
 
       if (!cardId) {
         console.error('No id provided');
@@ -51,8 +53,9 @@ export default function UserNFC() {
       } else {
         console.error('Failed to fetch profile:', result.message);
       }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
+    } catch (err) {
+      console.error('Error fetching profile:', err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -120,13 +123,18 @@ export default function UserNFC() {
   }
 
   if (!profile) {
+    if (!error && cardId) {
+      window.location.href = `https://1secstory.com/register?card_id=${cardId}`;
+      return null;
+    }
+
     return (
       <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
         <div className="absolute top-0 left-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 rounded-full blur-3xl opacity-60 -translate-x-1/4 -translate-y-1/4"></div>
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
         <div className="relative z-10 text-center">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">No data available</h2>
-          <p className="text-gray-600">Profile not found</p>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">{error ? 'Server Error' : 'No data available'}</h2>
+          <p className="text-gray-600">{error ? 'Unable to connect to server. Please try again later.' : 'Profile not found'}</p>
         </div>
       </div>
     );
