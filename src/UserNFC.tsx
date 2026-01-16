@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, CreditCard as Edit3, ChevronRight } from 'lucide-react';
+import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, UserCog, ChevronRight } from 'lucide-react';
 
 interface UserProfile {
   card_id: string;
@@ -174,37 +174,44 @@ export default function UserNFC() {
       <div className="relative z-10 max-w-xl mx-auto">
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           {/* Profile Header */}
-          <div className="text-center pt-8 pb-6 px-6">
-            {/* Avatar */}
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white text-4xl font-bold mb-4">
-              {getInitial(profile.display_name)}
-            </div>
+          <div className="pt-8 pb-6 px-6">
+            <div className="flex items-start gap-4 mb-6">
+              {/* Avatar */}
+              <div className="flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white text-4xl font-bold flex-shrink-0">
+                {getInitial(profile.display_name)}
+              </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-3 justify-center mb-4">
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
-              >
-                <Share2 className="w-4 h-4" />
-                Share
-              </button>
-              <button
-                onClick={handleSave}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
-              >
-                <Bookmark className="w-4 h-4" />
-                Save Story
-              </button>
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-2 flex-1">
+                <button
+                  onClick={handleShare}
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-all w-full"
+                >
+                  <Share2 className="w-4 h-4" />
+                  Share Story
+                </button>
+                <div className="flex gap-2 items-center">
+                  <button
+                    onClick={handleSave}
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white border-2 border-black text-black rounded-full text-sm font-medium hover:bg-gray-50 transition-all flex-1"
+                  >
+                    <Bookmark className="w-4 h-4" />
+                    Save Story
+                  </button>
+                  <button className="flex items-center justify-center w-10 h-10 bg-white border-2 border-black rounded-full hover:bg-gray-50 transition-all">
+                    <UserCog className="w-4 h-4 text-black" />
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Name */}
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2 text-left">
               {profile.display_name || 'No name'}
             </h1>
 
             {/* Headline */}
-            <div className="flex items-center justify-center gap-1.5 text-blue-600 mb-2">
+            <div className="flex items-center gap-1.5 text-purple-600 mb-2">
               <Briefcase className="w-4 h-4" />
               <span className="text-sm font-medium">{formatValue(profile.headline)}</span>
             </div>
@@ -212,8 +219,8 @@ export default function UserNFC() {
 
           {/* Micro Facts Section */}
           <div className="px-6 pb-6">
-            <div className="bg-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">My story</h3>
+            <div className="bg-gray-50 rounded-xl p-4 max-h-48 overflow-y-auto border border-gray-200">
+              <h3 className="text-base font-semibold text-gray-900 mb-2">My Story</h3>
               <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
                 {profile.micro_facts && profile.micro_facts !== 'None' ? (
                   profile.micro_facts
@@ -226,7 +233,7 @@ export default function UserNFC() {
 
           {/* Contact Information */}
           <div className="px-6 pb-6">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Contact Information</h3>
+            <h3 className="text-base font-semibold text-gray-900 mb-3">My Contact</h3>
             <div className="space-y-2">
               {profile.whatsapp && profile.whatsapp !== 'None' && (
                 <a
@@ -235,30 +242,13 @@ export default function UserNFC() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                    <MessageCircle className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-500">WhatsApp</div>
+                    <div className="text-xs text-gray-500">Whatsapp</div>
                     <div className="text-sm font-medium text-gray-900">{profile.whatsapp}</div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                </a>
-              )}
-
-              {profile.phone && profile.phone !== 'None' && (
-                <a
-                  href={`tel:${profile.phone}`}
-                  className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-500">Phone</div>
-                    <div className="text-sm font-medium text-gray-900">{profile.phone}</div>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
                 </a>
               )}
 
@@ -267,14 +257,13 @@ export default function UserNFC() {
                   href={`mailto:${profile.email_public}`}
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-red-600" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-xs text-gray-500">Email</div>
                     <div className="text-sm font-medium text-gray-900 truncate">{profile.email_public}</div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
                 </a>
               )}
 
@@ -285,14 +274,13 @@ export default function UserNFC() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <Linkedin className="w-5 h-5 text-blue-700" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                    <Linkedin className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-500">LinkedIn</div>
+                    <div className="text-xs text-gray-500">Socials</div>
                     <div className="text-sm font-medium text-gray-900 truncate">{profile.linkedin}</div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
                 </a>
               )}
 
@@ -303,14 +291,13 @@ export default function UserNFC() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                    <Globe className="w-5 h-5 text-purple-600" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-xs text-gray-500">Website</div>
                     <div className="text-sm font-medium text-gray-900 truncate">{profile.website}</div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
                 </a>
               )}
 
@@ -321,14 +308,13 @@ export default function UserNFC() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gray-500">Payment Link</div>
+                    <div className="text-xs text-gray-500">Payment</div>
                     <div className="text-sm font-medium text-gray-900 truncate">{profile.payment_link}</div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
                 </a>
               )}
             </div>
@@ -337,28 +323,32 @@ export default function UserNFC() {
         </div>
 
         {/* Action Buttons - Bottom */}
-        <div className="flex gap-3 justify-between mt-6">
+        <div className="flex gap-3 justify-center items-center mt-6">
           <a
             href="https://1secstory.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
+            className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
           >
             <Bookmark className="w-5 h-5" />
-            Get yours
+            Get Yours
           </a>
           <a
             href="/edit_profile"
-            className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
+            className="flex items-center justify-center w-12 h-12 bg-white border-2 border-black rounded-full shadow-lg hover:shadow-xl transition-all"
           >
-            <Edit3 className="w-5 h-5" />
-            Edit Details
+            <UserCog className="w-5 h-5 text-black" />
           </a>
         </div>
 
         {/* Logo at Bottom */}
-        <div className="text-center mt-8">
-          <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-12 mx-auto object-contain" />
+        <div className="text-center mt-6">
+          <div className="flex items-center justify-center gap-2 text-purple-400">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center">
+              <Bookmark className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-sm font-medium tracking-wider">1 SEC STORY</span>
+          </div>
         </div>
       </div>
     </div>
