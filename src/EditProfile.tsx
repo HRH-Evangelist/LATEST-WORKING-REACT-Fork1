@@ -340,7 +340,7 @@ function EditProfile() {
             disabled={isLoading}
             className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
           >
-            {isLoading ? 'Saving Changes...' : 'Save Changes'}
+            {isLoading ? 'Saving Changes...' : 'Save Story'}
           </button>
 
           {message && (
