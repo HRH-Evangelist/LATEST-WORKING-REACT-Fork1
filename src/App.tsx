@@ -111,13 +111,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-8">
-      {/* Gradient Blobs */}
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 rounded-full blur-3xl opacity-60 -translate-x-1/4 -translate-y-1/4"></div>
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
-
-      {/* Main Card */}
-      <div className="relative z-10 w-full max-w-md">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-md">
         <div className="text-center mb-6 md:mb-8">
           {/* Logo */}
           <div className="inline-block mb-3 md:mb-4">
