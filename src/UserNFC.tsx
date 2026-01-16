@@ -69,9 +69,37 @@ export default function UserNFC() {
   };
 
   const handleSave = async () => {
-    const url = window.location.href;
-    await navigator.clipboard.writeText(url);
-    alert('Link copied to clipboard!');
+    if (!profile) return;
+
+    const cleanValue = (value: string | null | undefined) => {
+      if (!value || value === 'None' || value === 'null') return '';
+      return value;
+    };
+
+    const vCard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `FN:${profile.display_name || 'Contact'}`,
+      cleanValue(profile.phone) ? `TEL;TYPE=CELL:${cleanValue(profile.phone)}` : '',
+      cleanValue(profile.email_public) ? `EMAIL:${cleanValue(profile.email_public)}` : '',
+      cleanValue(profile.headline) ? `TITLE:${cleanValue(profile.headline)}` : '',
+      cleanValue(profile.website) ? `URL:${cleanValue(profile.website)}` : '',
+      cleanValue(profile.linkedin) ? `URL;type=LinkedIn:${cleanValue(profile.linkedin)}` : '',
+      cleanValue(profile.whatsapp) ? `TEL;TYPE=WhatsApp:${cleanValue(profile.whatsapp)}` : '',
+      cleanValue(profile.micro_facts) ? `NOTE:${cleanValue(profile.micro_facts).replace(/\n/g, '\\n')}` : '',
+      cleanValue(profile.payment_link) ? `URL;type=Payment:${cleanValue(profile.payment_link)}` : '',
+      'END:VCARD'
+    ].filter(line => line !== '').join('\n');
+
+    const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${profile.display_name || 'contact'}.vcf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const formatValue = (value: string | null | undefined) => {
