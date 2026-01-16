@@ -139,11 +139,6 @@ export default function UserNFC() {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
 
       <div className="relative z-10 max-w-xl mx-auto">
-        {/* Logo at Top */}
-        <div className="text-center mb-6">
-          <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-12 mx-auto object-contain" />
-        </div>
-
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           {/* Profile Header */}
           <div className="text-center pt-8 pb-6 px-6">
@@ -326,6 +321,11 @@ export default function UserNFC() {
             <Edit3 className="w-5 h-5" />
             Edit Details
           </a>
+        </div>
+
+        {/* Logo at Bottom */}
+        <div className="text-center mt-8">
+          <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-12 mx-auto object-contain" />
         </div>
       </div>
     </div>
