@@ -150,7 +150,7 @@ function EditProfile() {
           }
         }
 
-        setMessage('Profile updated successfully! Redirecting [NFC Method]...');
+        setMessage('Profile updated successfully!');
         setTimeout(() => {
           window.location.href = `/user-nfc?id=${sessionCardId}`;
         }, 1000);
