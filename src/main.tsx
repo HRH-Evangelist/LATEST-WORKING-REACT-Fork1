@@ -7,6 +7,7 @@ import UserNFC from './UserNFC.tsx';
 import UserRedirect from './UserRedirect.tsx';
 import EditProfile from './EditProfile.tsx';
 import HHL from './HHL.tsx';
+import ResetPassword from './ResetPassword.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/register" element={<App />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/user-nfc" element={<UserNFC />} />
         <Route path="/user" element={<UserRedirect />} />
         <Route path="/edit_profile" element={<EditProfile />} />

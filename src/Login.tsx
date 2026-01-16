@@ -148,6 +148,14 @@ function Login() {
               Register here
             </a>
           </p>
+
+          {/* Forgot Password Link */}
+          <p className="text-center text-sm text-gray-600">
+            Forgot your password?{' '}
+            <a href="/reset-password" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+              Reset it here
+            </a>
+          </p>
         </div>
       </div>
     </div>
