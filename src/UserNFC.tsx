@@ -185,7 +185,7 @@ export default function UserNFC() {
           {/* Micro Facts Section */}
           <div className="px-6 pb-6">
             <div className="bg-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Micro Facts</h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">My story</h3>
               <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
                 {profile.micro_facts && profile.micro_facts !== 'None' ? (
                   profile.micro_facts
@@ -312,7 +312,7 @@ export default function UserNFC() {
         <div className="flex gap-3 justify-between mt-6">
           <a
             href="https://1secstory.com"
-            target="/"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
           >
