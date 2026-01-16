@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, Edit3, ChevronRight } from 'lucide-react';
+import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, CreditCard as Edit3, ChevronRight } from 'lucide-react';
 
 interface UserProfile {
   card_id: string;
