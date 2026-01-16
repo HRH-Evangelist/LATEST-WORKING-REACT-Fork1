@@ -20,7 +20,7 @@ export default function UserRedirect() {
         <div className="inline-block mb-4">
           <img src="/artboard_2_1.png" alt="1SecStory" className="w-20 h-20 md:w-24 md:h-24 object-contain" />
         </div>
-        <div className="text-gray-600">Redirecting...</div>
+        <div className="text-gray-600">Processing...</div>
       </div>
     </div>
   );
