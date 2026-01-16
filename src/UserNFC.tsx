@@ -139,6 +139,11 @@ export default function UserNFC() {
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
 
       <div className="relative z-10 max-w-xl mx-auto">
+        {/* Logo at Top */}
+        <div className="text-center mb-6">
+          <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-12 mx-auto object-contain" />
+        </div>
+
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           {/* Profile Header */}
           <div className="text-center pt-8 pb-6 px-6">
@@ -180,7 +185,7 @@ export default function UserNFC() {
           {/* Micro Facts Section */}
           <div className="px-6 pb-6">
             <div className="bg-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">My Story</h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Micro Facts</h3>
               <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
                 {profile.micro_facts && profile.micro_facts !== 'None' ? (
                   profile.micro_facts
@@ -307,7 +312,7 @@ export default function UserNFC() {
         <div className="flex gap-3 justify-between mt-6">
           <a
             href="https://1secstory.com"
-            target="_blank"
+            target="/"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
           >
@@ -315,17 +320,12 @@ export default function UserNFC() {
             Get yours
           </a>
           <a
-            href="/"
+            href="/edit_profile"
             className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
           >
             <Edit3 className="w-5 h-5" />
             Edit Details
           </a>
-        </div>
-
-        {/* Logo at Bottom */}
-        <div className="text-center mt-8">
-          <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-12 mx-auto object-contain" />
         </div>
       </div>
     </div>
