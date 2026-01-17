@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, MessageSquare, Phone, Mail, Linkedin, Globe, CreditCard, Link2 } from 'lucide-react';
+import { User, Briefcase, MessageSquare, Mail, Linkedin, Globe, CreditCard, Link2 } from 'lucide-react';
+import PhoneInput from './PhoneInput';
 
 interface ProfileData {
   display_name: string | null;
@@ -234,33 +235,19 @@ function EditProfile() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp</label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={formData.whatsapp || ''}
-                  onChange={(e) => handleChange('whatsapp', e.target.value)}
-                  placeholder="+1234567890"
-                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-base"
-                />
-              </div>
-            </div>
+            <PhoneInput
+              value={formData.whatsapp || ''}
+              onChange={(value) => handleChange('whatsapp', value)}
+              label="WhatsApp"
+              placeholder="1234567890"
+            />
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={formData.phone || ''}
-                  onChange={(e) => handleChange('phone', e.target.value)}
-                  placeholder="+1234567890"
-                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-base"
-                />
-              </div>
-            </div>
+            <PhoneInput
+              value={formData.phone || ''}
+              onChange={(value) => handleChange('phone', value)}
+              label="Phone"
+              placeholder="1234567890"
+            />
           </div>
 
           <div>
