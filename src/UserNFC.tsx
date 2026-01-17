@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, CreditCard as Edit3, ChevronRight } from 'lucide-react';
+import { Share2, Bookmark, Briefcase, Phone, Mail, Linkedin, Globe, MessageCircle, CreditCard, CreditCard as Edit3, ChevronRight, ArrowLeft } from 'lucide-react';
 
 interface UserProfile {
   card_id: string;
@@ -21,7 +21,9 @@ export default function UserNFC() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [showFullBio, setShowFullBio] = useState(false);
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const cardId = searchParams.get('id');
+  const isPreview = searchParams.get('preview');
 
   useEffect(() => {
     fetchProfile();
@@ -31,6 +33,19 @@ export default function UserNFC() {
     try {
       setLoading(true);
       setError(false);
+
+      const preview = isPreview === 'true';
+      setIsPreviewMode(preview);
+
+      if (preview) {
+        const previewData = sessionStorage.getItem('previewData');
+        if (previewData) {
+          const data = JSON.parse(previewData);
+          setProfile({ ...data, card_id: cardId || '' });
+          setLoading(false);
+          return;
+        }
+      }
 
       if (!cardId) {
         console.error('No id provided');
@@ -337,24 +352,36 @@ export default function UserNFC() {
         </div>
 
         {/* Action Buttons - Bottom */}
-        <div className="flex gap-3 justify-between mt-6">
-          <a
-            href="https://1secstory.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
-          >
-            <Bookmark className="w-5 h-5" />
-            Get yours
-          </a>
-          <a
-            href="/login"
-            className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
-          >
-            <Edit3 className="w-5 h-5" />
-            Edit Details
-          </a>
-        </div>
+        {isPreviewMode ? (
+          <div className="flex gap-3 justify-center mt-6">
+            <a
+              href="/edit_profile"
+              className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back to Edit
+            </a>
+          </div>
+        ) : (
+          <div className="flex gap-3 justify-between mt-6">
+            <a
+              href="https://1secstory.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
+            >
+              <Bookmark className="w-5 h-5" />
+              Get yours
+            </a>
+            <a
+              href="/login"
+              className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
+            >
+              <Edit3 className="w-5 h-5" />
+              Edit Details
+            </a>
+          </div>
+        )}
 
         {/* Logo at Bottom */}
         <div className="text-center mt-8">
