@@ -10,7 +10,7 @@ interface PhoneInputProps {
 }
 
 function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: PhoneInputProps) {
-  const [selectedCode, setSelectedCode] = useState('+1');
+  const [selectedCode, setSelectedCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,7 +57,9 @@ function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: Phon
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="h-full px-3 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all flex items-center gap-1 min-w-[90px]"
           >
-            <span className="text-base font-medium text-gray-700">{selectedCode}</span>
+            <span className="text-base font-medium text-gray-700">
+              {selectedCode || 'None'}
+            </span>
             <ChevronDown className="w-4 h-4 text-gray-500" />
           </button>
 
@@ -74,6 +76,13 @@ function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: Phon
                 />
               </div>
               <div className="overflow-y-auto">
+                <button
+                  type="button"
+                  onClick={() => handleCodeChange('')}
+                  className="w-full px-3 py-2.5 text-left hover:bg-blue-50 border-b border-gray-100 text-sm transition-colors font-medium text-gray-600"
+                >
+                  No country code
+                </button>
                 {filteredCountries.map((country) => (
                   <button
                     key={country.code}
