@@ -348,7 +348,7 @@ export default function UserNFC() {
             Get yours
           </a>
           <a
-            href="/edit_profile"
+            href="/login"
             className="flex items-center gap-2 px-5 py-3 bg-white/80 backdrop-blur-md hover:bg-white/90 text-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all font-medium border border-gray-200/50"
           >
             <Edit3 className="w-5 h-5" />

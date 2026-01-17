@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Lock, CreditCard, Loader2 } from 'lucide-react';
 
 function Login() {
@@ -7,6 +7,29 @@ function Login() {
   const [cardId, setCardId] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
+
+  useEffect(() => {
+    checkExistingSession();
+  }, []);
+
+  const checkExistingSession = async () => {
+    try {
+      const response = await fetch('https://api.1secstory.com/get_session_card', {
+        credentials: 'include'
+      });
+      const data = await response.json();
+
+      if (data.success && data.card_id) {
+        window.location.href = '/edit_profile';
+        return;
+      }
+    } catch (error) {
+      console.log('No existing session');
+    } finally {
+      setCheckingSession(false);
+    }
+  };
 
   const validateEmail = (email: string) => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -53,6 +76,16 @@ function Login() {
       setIsLoading(false);
     }
   };
+
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-8">
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 rounded-full blur-3xl opacity-60 -translate-x-1/4 -translate-y-1/4"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
+        <div className="relative z-10 text-gray-600">Checking session...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center px-4 py-8">
