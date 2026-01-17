@@ -60,6 +60,13 @@ function EditProfile() {
 
   const loadProfile = async (cardId: string) => {
     try {
+      const draftData = sessionStorage.getItem('editDraftData');
+
+      if (draftData) {
+        setFormData(JSON.parse(draftData));
+        return;
+      }
+
       const response = await fetch('https://api.1secstory.com/get_public_info', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,7 +77,7 @@ function EditProfile() {
       const data = await response.json();
 
       if (data.success && data.data) {
-        setFormData({
+        const profileData = {
           display_name: data.data.display_name || '',
           headline: data.data.headline || '',
           micro_facts: data.data.micro_facts || '',
@@ -82,7 +89,9 @@ function EditProfile() {
           payment_link: data.data.payment_link || '',
           nfc_pin_hash: data.data.nfc_pin_hash || '',
           qr_link: data.data.qr_link || ''
-        });
+        };
+        setFormData(profileData);
+        sessionStorage.setItem('editDraftData', JSON.stringify(profileData));
       }
     } catch (error) {
       console.error('Failed to load profile', error);
@@ -91,10 +100,12 @@ function EditProfile() {
   };
 
   const handleChange = (field: keyof ProfileData, value: string) => {
-    setFormData(prev => ({
-      ...prev,
+    const updatedData = {
+      ...formData,
       [field]: value
-    }));
+    };
+    setFormData(updatedData);
+    sessionStorage.setItem('editDraftData', JSON.stringify(updatedData));
   };
 
   const getValueOrNull = (value: string) => {
@@ -150,6 +161,9 @@ function EditProfile() {
             console.error('Failed to update redirect', error);
           }
         }
+
+        sessionStorage.removeItem('editDraftData');
+        sessionStorage.removeItem('previewData');
 
         setMessage('Profile updated successfully!');
         setTimeout(() => {
@@ -342,7 +356,7 @@ function EditProfile() {
               className="flex-1 py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
             >
               {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
-              {isLoading ? 'Saving Changes...' : 'Save Story'}
+              {isLoading ? 'Publishing...' : 'Publish Story'}
             </button>
           </div>
 
