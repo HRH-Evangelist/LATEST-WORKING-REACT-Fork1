@@ -209,7 +209,7 @@ export default function UserNFC() {
                 className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
               >
                 <Bookmark className="w-4 h-4" />
-                Publish Story
+                Save Story
               </button>
             </div>
 
