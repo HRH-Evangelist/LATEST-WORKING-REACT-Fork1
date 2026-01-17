@@ -55,12 +55,12 @@ function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: Phon
           <button
             type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="h-full px-3 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all flex items-center gap-1 min-w-[90px]"
+            className="h-full px-3 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 active:scale-[0.98] focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all flex items-center gap-1 min-w-[90px]"
           >
             <span className="text-base font-medium text-gray-700">
               {selectedCode || 'None'}
             </span>
-            <ChevronDown className="w-4 h-4 text-gray-500" />
+            <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {isDropdownOpen && (
@@ -79,7 +79,7 @@ function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: Phon
                 <button
                   type="button"
                   onClick={() => handleCodeChange('')}
-                  className="w-full px-3 py-2.5 text-left hover:bg-blue-50 border-b border-gray-100 text-sm transition-colors font-medium text-gray-600"
+                  className="w-full px-3 py-2.5 text-left hover:bg-blue-50 active:bg-blue-100 border-b border-gray-100 text-sm transition-colors font-medium text-gray-600"
                 >
                   No country code
                 </button>
@@ -88,7 +88,7 @@ function PhoneInput({ value, onChange, label, placeholder = "1234567890" }: Phon
                     key={country.code}
                     type="button"
                     onClick={() => handleCodeChange(country.dialCode)}
-                    className="w-full px-3 py-2 text-left hover:bg-blue-50 flex items-center justify-between text-sm transition-colors"
+                    className="w-full px-3 py-2 text-left hover:bg-blue-50 active:bg-blue-100 flex items-center justify-between text-sm transition-colors"
                   >
                     <span className="text-gray-700">
                       {country.name}

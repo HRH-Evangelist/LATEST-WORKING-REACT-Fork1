@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, MessageSquare, Mail, Linkedin, Globe, CreditCard, Link2 } from 'lucide-react';
+import { User, Briefcase, MessageSquare, Mail, Linkedin, Globe, CreditCard, Link2, Loader2 } from 'lucide-react';
 import PhoneInput from './PhoneInput';
 
 interface ProfileData {
@@ -325,8 +325,9 @@ function EditProfile() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+            className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
           >
+            {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
             {isLoading ? 'Saving Changes...' : 'Save Story'}
           </button>
 

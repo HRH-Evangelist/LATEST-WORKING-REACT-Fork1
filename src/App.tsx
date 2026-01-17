@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Lock, Key, Hash } from 'lucide-react';
+import { Mail, Lock, Key, Hash, Loader2 } from 'lucide-react';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -222,16 +222,18 @@ function App() {
             <button
               onClick={handleSendOtp}
               disabled={isLoading || !cardId}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
             >
+              {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
               {isLoading ? 'Sending...' : 'Continue to Verification'}
             </button>
           ) : (
             <button
               onClick={handleVerifyOtp}
               disabled={isLoading}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
             >
+              {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
               {isLoading ? 'Verifying...' : 'Verify OTP'}
             </button>
           )}

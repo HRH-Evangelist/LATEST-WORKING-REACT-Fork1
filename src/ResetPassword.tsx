@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Lock, Key } from 'lucide-react';
+import { Mail, Lock, Key, Loader2 } from 'lucide-react';
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -157,16 +157,18 @@ function ResetPassword() {
             <button
               onClick={handleSendOtp}
               disabled={isLoading}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
             >
+              {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
               {isLoading ? 'Sending OTP...' : 'Get OTP'}
             </button>
           ) : (
             <button
               onClick={handleResetPassword}
               disabled={isLoading}
-              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm text-base"
+              className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
             >
+              {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
               {isLoading ? 'Resetting...' : 'Reset Password'}
             </button>
           )}
