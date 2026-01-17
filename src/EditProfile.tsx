@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Briefcase, MessageSquare, Mail, Linkedin, Globe, CreditCard, Link2, Loader2 } from 'lucide-react';
+import { User, Briefcase, MessageSquare, Mail, Linkedin, Globe, CreditCard, Link2, Loader2, Eye, X, Phone, MessageCircle, ChevronRight, Share2, Bookmark } from 'lucide-react';
 import PhoneInput from './PhoneInput';
 
 interface ProfileData {
@@ -20,6 +20,7 @@ function EditProfile() {
   const [sessionCardId, setSessionCardId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState<ProfileData>({
     display_name: '',
     headline: '',
@@ -208,7 +209,7 @@ function EditProfile() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Headline</label>
               <div className="relative">
-                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Briefcase className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
                   value={formData.headline || ''}
@@ -322,14 +323,24 @@ function EditProfile() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
-          >
-            {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
-            {isLoading ? 'Saving Changes...' : 'Save Story'}
-          </button>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => setShowPreview(true)}
+              className="flex-1 py-3.5 md:py-4 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
+            >
+              <Eye className="w-5 h-5" />
+              Preview
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex-1 py-3.5 md:py-4 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md text-base flex items-center justify-center gap-2"
+            >
+              {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
+              {isLoading ? 'Saving Changes...' : 'Save Story'}
+            </button>
+          </div>
 
           {message && (
             <div className={`text-center text-sm font-medium ${
@@ -340,6 +351,151 @@ function EditProfile() {
           )}
         </form>
       </div>
+
+      {/* Preview Modal */}
+      {showPreview && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="relative w-full max-w-xl my-8">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowPreview(false)}
+              className="absolute -top-2 -right-2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 active:scale-95 transition-all"
+            >
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+
+            {/* Preview Content */}
+            <div className="bg-white rounded-2xl shadow-xl">
+              {/* Profile Header */}
+              <div className="text-center pt-8 pb-6 px-6">
+                {/* Avatar */}
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white text-4xl font-bold mb-4">
+                  {formData.display_name ? formData.display_name.charAt(0).toUpperCase() : '?'}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 justify-center mb-4">
+                  <button className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium cursor-default">
+                    <Share2 className="w-4 h-4" />
+                    Share
+                  </button>
+                  <button className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium cursor-default">
+                    <Bookmark className="w-4 h-4" />
+                    Save Story
+                  </button>
+                </div>
+
+                {/* Name */}
+                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  {formData.display_name || 'No name'}
+                </h1>
+
+                {/* Headline */}
+                <div className="flex items-start justify-center gap-1.5 text-blue-600 mb-2">
+                  <Briefcase className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm font-medium text-center">
+                    {formData.headline || <span className="text-gray-400">-</span>}
+                  </span>
+                </div>
+              </div>
+
+              {/* Micro Facts Section */}
+              <div className="px-6 pb-6">
+                <div className="bg-gray-200 rounded-xl p-4 max-h-48 overflow-y-auto">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-2">My story</h3>
+                  <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap break-words">
+                    {formData.micro_facts || <span className="text-gray-400">-</span>}
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className="px-6 pb-6">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Contact Information</h3>
+                <div className="space-y-2">
+                  {formData.whatsapp && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <MessageCircle className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">WhatsApp</div>
+                        <div className="text-sm font-medium text-gray-900">{formData.whatsapp}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+
+                  {formData.phone && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                        <Phone className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">Phone</div>
+                        <div className="text-sm font-medium text-gray-900">{formData.phone}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+
+                  {formData.email_public && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                        <Mail className="w-5 h-5 text-red-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">Email</div>
+                        <div className="text-sm font-medium text-gray-900 truncate">{formData.email_public}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+
+                  {formData.linkedin && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                        <Linkedin className="w-5 h-5 text-blue-700" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">LinkedIn</div>
+                        <div className="text-sm font-medium text-gray-900 truncate">{formData.linkedin}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+
+                  {formData.website && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                        <Globe className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">Website</div>
+                        <div className="text-sm font-medium text-gray-900 truncate">{formData.website}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+
+                  {formData.payment_link && (
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <CreditCard className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-gray-500">Payment Link</div>
+                        <div className="text-sm font-medium text-gray-900 truncate">{formData.payment_link}</div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-gray-400" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -204,9 +204,9 @@ export default function UserNFC() {
             </h1>
 
             {/* Headline */}
-            <div className="flex items-center justify-center gap-1.5 text-blue-600 mb-2">
-              <Briefcase className="w-4 h-4" />
-              <span className="text-sm font-medium">{formatValue(profile.headline)}</span>
+            <div className="flex items-start justify-center gap-1.5 text-blue-600 mb-2">
+              <Briefcase className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span className="text-sm font-medium text-center">{formatValue(profile.headline)}</span>
             </div>
           </div>
 
