@@ -156,7 +156,7 @@ export default function UserNFC() {
     return (
       <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
         <div className="absolute top-0 left-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 rounded-full blur-3xl opacity-60 -translate-x-1/4 -translate-y-1/4"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-yellow-200 via-orange-200 to-yellow-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
         <div className="relative z-10 text-gray-600">Loading...</div>
       </div>
     );
@@ -171,7 +171,7 @@ export default function UserNFC() {
     return (
       <div className="min-h-screen bg-white relative overflow-hidden flex items-center justify-center">
         <div className="absolute top-0 left-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-pink-200 via-purple-200 to-pink-100 rounded-full blur-3xl opacity-60 -translate-x-1/4 -translate-y-1/4"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-yellow-200 via-orange-200 to-yellow-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[500px] md:h-[500px] bg-gradient-to-tl from-blue-200 via-cyan-200 to-blue-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
         <div className="relative z-10 text-center">
           <h2 className="text-xl font-semibold text-gray-800 mb-2">{error ? 'Server Error' : 'No data available'}</h2>
           <p className="text-gray-600">{error ? 'Unable to connect to server. Please try again later.' : 'Profile not found'}</p>
@@ -191,38 +191,38 @@ export default function UserNFC() {
           {/* Profile Header */}
           <div className="text-center pt-8 pb-6 px-6">
             {/* Avatar */}
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-yellow-500 via-orange-500 to-purple-500 text-white text-4xl font-bold mb-4">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 text-white text-4xl font-bold mb-4">
               {getInitial(profile.display_name)}
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3 justify-center mb-4">
               <button
-                onClick={handleSave}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-yellow-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
-              >
-                <Bookmark className="w-4 h-4" />
-                Save Story
-              </button>
-              <button
                 onClick={handleShare}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-yellow-500 to-purple-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
               >
                 <Share2 className="w-4 h-4" />
                 Share
               </button>
-            </div>
-
-            {/* Headline */}
-            <div className="flex items-start justify-center gap-1.5 text-orange-600 mb-2">
-              <Briefcase className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <span className="text-sm font-medium text-center">{formatValue(profile.headline)}</span>
+              <button
+                onClick={handleSave}
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all"
+              >
+                <Bookmark className="w-4 h-4" />
+                Save Story
+              </button>
             </div>
 
             {/* Name */}
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
               {profile.display_name || 'No name'}
             </h1>
+
+            {/* Headline */}
+            <div className="flex items-start justify-center gap-1.5 text-blue-600 mb-2">
+              <Briefcase className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span className="text-sm font-medium text-center">{formatValue(profile.headline)}</span>
+            </div>
           </div>
 
           {/* Micro Facts Section */}
@@ -368,7 +368,7 @@ export default function UserNFC() {
               href="https://1secstory.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-yellow-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
+              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all font-medium"
             >
               <Bookmark className="w-5 h-5" />
               Get yours
