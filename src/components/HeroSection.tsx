@@ -40,7 +40,7 @@ export function HeroSection() {
   const isInView = useInView(cardRef, { once: false, amount: 0.3 });
 
   // WhatsApp number - Update this with your actual number
-  const WHATSAPP_NUMBER = "919087083332";
+  const WHATSAPP_NUMBER = "919791152717";
 
   const card = metalCards[activeCard];
 
