@@ -22,7 +22,7 @@ export function CustomizationSection() {
   const [quantity, setQuantity] = useState("");
 
   const WHATSAPP_NUMBER = "919791152717";
-  const YOUR_EMAIL = "vatsahary@gmail.com";
+  const YOUR_EMAIL = "1secstory@gmail.com";
 
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
