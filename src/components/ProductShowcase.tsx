@@ -85,14 +85,8 @@ export function ProductShowcase() {
       quantity: 1,
     };
 
-    // Add default user details for test mode
-    const userDetails = {
-      name: "Test Customer",
-      email: "customer@test.com",
-      contact: "9999999999",
-    };
-
-    await initiatePayment(productDetails, userDetails);
+    
+    await initiatePayment(productDetails);
   };
 
   return (
