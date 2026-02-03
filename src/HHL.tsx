@@ -30,7 +30,7 @@ export default function HHL() {
       <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <img src="/artboard_2_copy_4.png" alt="1SecStory" className="h-16 mx-auto object-contain mb-6" />
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Loading HHL Test</h1>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Loading HHL</h1>
           <p className="text-gray-600 text-sm">Please wait while we prepare your experience</p>
         </div>
 
