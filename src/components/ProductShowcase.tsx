@@ -84,8 +84,7 @@ export function ProductShowcase() {
       price: numericPrice,
       quantity: 1,
     };
-
-    
+   
     await initiatePayment(productDetails);
   };
 
