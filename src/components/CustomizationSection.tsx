@@ -21,7 +21,7 @@ export function CustomizationSection() {
   const [company, setCompany] = useState("");
   const [quantity, setQuantity] = useState("");
 
-  const WHATSAPP_NUMBER = "919087083332";
+  const WHATSAPP_NUMBER = "919791152717";
   const YOUR_EMAIL = "vatsahary@gmail.com";
 
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
