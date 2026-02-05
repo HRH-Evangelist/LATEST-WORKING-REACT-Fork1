@@ -4,16 +4,16 @@ import logo from "../assets/Website-Logo.png";
 export function Footer() {
   const links = {
     product: [
-      { label: "Shop", href: "#shop" },
-      { label: "Activate", href: "#activate" },
-      { label: "Dashboard", href: "#dashboard" },
-      { label: "Pricing", href: "#pricing" },
+      { label: "Metal Cards", href: "#products" },
+      { label: "Activate Card", href: "#activate" },
+      { label: "Dashboard", href: "/user" },
+      { label: "How It Works", href: "#interactive" },
     ],
     support: [
-      { label: "FAQ", href: "#faq" },
-      { label: "Contact", href: "#contact" },
-      { label: "Support", href: "#support" },
-      { label: "Shipping", href: "#shipping" },
+      { label: "Contact Us", href: "#support" },
+      { label: "FAQ", href: "#support" },
+      { label: "Shipping Info", href: "#support" },
+      { label: "WhatsApp", href: "https://wa.me/919791152717" },
     ],
      
   };
@@ -88,10 +88,24 @@ export function Footer() {
  
         </div>
 
+        {/* Legal Links */}
+        <div className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+          <a href="/terms" className="text-gray-600 hover:text-gray-900 transition-colors">Terms of Service</a>
+          <a href="/privacy" className="text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a>
+          <a href="#support" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Support</a>
+        </div>
+
+        {/* Business Information */}
+        <div className="mb-8 text-center bg-gray-50 py-6 px-4 rounded-xl border border-gray-200">
+          <p className="text-gray-700 font-semibold mb-2">Viraan Holdings</p>
+          <p className="text-gray-600 text-sm mb-1">Merchant: RAMACHANDRAN HARIVATSA</p>
+          <p className="text-gray-500 text-xs">Bangalore, Karnataka, India</p>
+        </div>
+
         {/* Bottom */}
         <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-500 text-sm tracking-wide">
-            © 2026 1 Sec Story. All rights reserved.
+            © 2026 1 Sec Story by Viraan Holdings. All rights reserved.
           </p>
           <div className="flex items-center space-x-2">
             <span className="text-gray-400 text-sm tracking-wide">
