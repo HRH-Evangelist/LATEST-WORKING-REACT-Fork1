@@ -21,14 +21,13 @@ export default function App() {
       
       <main>
         <HeroSection />
-        <ProductShowcase />
         <InteractiveExperience />
+        <ProductShowcase />
         <ActivateCard />
         <SocialProof />
         <CustomizationSection />
         <SupportSection />
       </main>
-      
       <Footer />
     </div>
   );
