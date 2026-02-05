@@ -84,13 +84,14 @@ export function ProductShowcase() {
       price: numericPrice,
       quantity: 1,
     };
-   
+
+    // User will enter their details in Razorpay modal
     await initiatePayment(productDetails);
   };
 
   return (
     <section
-      id="shop"
+      id="products"
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center py-16 px-6 lg:px-12"
     >
@@ -106,6 +107,11 @@ export function ProductShowcase() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20 space-y-4"
         >
+          <div className="mb-3">
+            <span className="text-purple-600 font-semibold tracking-wider uppercase text-sm">
+              Products
+            </span>
+          </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
             What's your{" "}
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
