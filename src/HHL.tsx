@@ -20,8 +20,8 @@ export default function App() {
       
       <main>
         <HeroSection />
-        <ProductShowcase />
         <InteractiveExperience />
+        <ProductShowcase />asd
         <ActivateCard />
         <SocialProof />
         <CustomizationSection />
