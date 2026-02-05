@@ -6,6 +6,7 @@ import { InteractiveExperience } from './components/InteractiveExperience';
 import { CustomizationSection } from './components/CustomizationSection';
 import { ActivateCard } from './components/ActivateCard';
 import { SocialProof } from './components/SocialProof';
+import { SupportSection } from './components/SupportSection';
 import { Footer } from './components/Footer';
 
 export default function App() {
@@ -20,11 +21,12 @@ export default function App() {
       
       <main>
         <HeroSection />
+        <ProductShowcase />
         <InteractiveExperience />
-        <ProductShowcase />asd
         <ActivateCard />
         <SocialProof />
         <CustomizationSection />
+        <SupportSection />
       </main>
       
       <Footer />
