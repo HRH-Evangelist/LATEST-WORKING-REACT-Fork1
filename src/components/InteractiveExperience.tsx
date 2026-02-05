@@ -34,6 +34,7 @@ export function InteractiveExperience() {
     "Easy Share Option",
     "Sleek metal design. No branding. All you.",
     "Compatible with all NFC reading devices",
+    "One time payment - no subscription"
   ];
  
   return (
@@ -124,7 +125,7 @@ export function InteractiveExperience() {
               className="inline-block px-4 py-2 bg-gradient-to-r  from-purple-600 to-blue-600 rounded-full"
             >
               <span className="text-white tracking-widest text-sm">
-                INTERACTIVE EXPERIENCE
+                What is 1 Sec Story?
               </span>
             </motion.div>
 
